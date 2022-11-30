@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="LeaveManagementApplication.Application\**" />
+    <Compile Remove="LeaveManagementApplication.Domain\**" />
+    <Compile Remove="LeaveManagementApplication.Infrastructure\**" />
+    <Content Remove="LeaveManagementApplication.Application\**" />
+    <Content Remove="LeaveManagementApplication.Domain\**" />
+    <Content Remove="LeaveManagementApplication.Infrastructure\**" />
+    <EmbeddedResource Remove="LeaveManagementApplication.Application\**" />
+    <EmbeddedResource Remove="LeaveManagementApplication.Domain\**" />
+    <EmbeddedResource Remove="LeaveManagementApplication.Infrastructure\**" />
+    <None Remove="LeaveManagementApplication.Application\**" />
+    <None Remove="LeaveManagementApplication.Domain\**" />
+    <None Remove="LeaveManagementApplication.Infrastructure\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>

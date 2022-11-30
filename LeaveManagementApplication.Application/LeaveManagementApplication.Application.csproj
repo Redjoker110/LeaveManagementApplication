@@ -13,14 +13,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LeaveManagementApplication.csproj" />
     <ProjectReference Include="..\LeaveManagementApplication.Domain\LeaveManagementApplication.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="DTO\" />
     <Folder Include="Features\LeaveAllocationFeatures\Command\" />
-    <Folder Include="Features\LeaveRequesteatures\Command\" />
-    <Folder Include="Features\LeaveTypeFeatures\Command\" />
     <Folder Include="ViewModels\Leavetype\" />
   </ItemGroup>
 

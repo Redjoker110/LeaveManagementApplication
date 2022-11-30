@@ -10,7 +10,7 @@ namespace LeaveManagementApplication.Application.Persistance.Contracts
     {
         Task<T> Get(int id);
         Task<IReadOnlyList<T>> GetAll();
-        Task<T> Add(int id);
+        Task<T> Add(T id);
         Task<T> update (T entity);
         Task<T> delete(T entity);
 
