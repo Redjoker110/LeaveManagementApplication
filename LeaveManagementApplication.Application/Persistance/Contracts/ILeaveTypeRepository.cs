@@ -2,7 +2,7 @@
 
 namespace LeaveManagementApplication.Application.Persistance.Contracts;
 
-public interface ILeaveTypeRepository : IGenericRepository<LeaveRequest>
+public interface ILeaveTypeRepository : IGenericRepository<LeaveType>
 {
     Task<LeaveType> GetLeaveTypeWithDetails(int Id);
     Task<List<LeaveType>> GetLeaveTypesList();
