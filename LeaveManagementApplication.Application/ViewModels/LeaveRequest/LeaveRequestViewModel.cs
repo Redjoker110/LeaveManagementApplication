@@ -3,15 +3,30 @@ using LeaveManagementApplication.Domain.Models;
 
 namespace LeaveManagementApplication.Application.ViewModels.LeaveRequest;
 
-public class LeaveRequestViewModel : BaseViewModel
+
+public interface ILeaveRequestViewModel
 {
-    public DateTime startDate { get; private set; }
-    public DateTime endDate { get; private set; }
-    public LeaveTypeViewModel leaveType { get; private set; }
-    public int leaveTypeId { get; private set; }
-    public DateTime dateRequested { get; private set; }
-    public string requestComments { get; private set; }
-    public DateTime? dateActioned { get; private set; }
-    public bool approved { get; private set; }
-    public bool cancelled { get; private set; }
+
+    public DateTime startDate { get;  set; }
+    public DateTime endDate { get;  set; }
+    public LeaveTypeViewModel leaveType { get;  set; }
+    public int leaveTypeId { get; set; }
+    public DateTime dateRequested { get; set; }
+    public string requestComments { get; set; }
+    public DateTime? dateActioned { get; set; }
+    public bool approved { get; set; }
+    public bool cancelled { get; set; }
+
+}
+public class LeaveRequestViewModel : BaseViewModel , ILeaveRequestViewModel
+{
+    public DateTime startDate { get; set; }
+    public DateTime endDate { get; set; }
+    public LeaveTypeViewModel leaveType { get; set; }
+    public int leaveTypeId { get; set; }
+    public DateTime dateRequested { get; set; }
+    public string requestComments { get; set; }
+    public DateTime? dateActioned { get; set; }
+    public bool approved { get; set; }
+    public bool cancelled { get; set; }
 }

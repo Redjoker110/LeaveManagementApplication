@@ -3,10 +3,19 @@ using LeaveManagementApplication.Domain.Models;
 
 namespace LeaveManagementApplication.Application.ViewModels.LeaveAllocation;
 
-public class LeaveAllocationViewModel : BaseViewModel
+public interface ILeaveAllocationViewModel
 {
-    public int numberOfDays { get; private set; }
-    public LeaveTypeViewModel leaveType { get; private set; }
-    public int leaveTypeId { get; private set; }
-    public int period { get; private set; }
+    public int numberOfDays { get;  set; }
+    public LeaveTypeViewModel leaveType { get;  set; }
+    public int leaveTypeId { get;  set; }
+    public int period { get;  set; }
+
+}
+
+public class LeaveAllocationViewModel : BaseViewModel, ILeaveAllocationViewModel
+{
+    public int numberOfDays { get;  set; }
+    public LeaveTypeViewModel leaveType { get;  set; }
+    public int leaveTypeId { get;  set; }
+    public int period { get;  set; }
 }

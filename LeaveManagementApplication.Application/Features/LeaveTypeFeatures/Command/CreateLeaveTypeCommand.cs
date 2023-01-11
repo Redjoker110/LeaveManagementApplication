@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using LeaveManagementApplication.Application.Features.LeaveAllocationFeatures.Command;
+using LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Validators;
 using LeaveManagementApplication.Application.Persistance.Contracts;
 using LeaveManagementApplication.Application.ViewModels;
 using LeaveManagementApplication.Domain.Models;
@@ -6,7 +8,7 @@ using MediatR;
 
 namespace LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Command;
 
-public class CreateLeaveTypeCommand : IRequest<int>
+public class CreateLeaveTypeCommand : IRequest<int> 
 {
     public int Id { get; set; }
     public string name { get; set; }
@@ -27,6 +29,16 @@ public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeComm
 
     public async Task<int> Handle(CreateLeaveTypeCommand command, CancellationToken cancellationToken)
     {
+        var validator = new CreateLeaveTypeValidator();
+        var validationResult = await validator.ValidateAsync(command.leaveTypeViewModel);
+
+        if (validationResult.IsValid == false)
+
+        {
+
+            throw new Exception();
+        }
+
         var leavetypes = _mapper.Map<LeaveType>(command.leaveTypeViewModel);
         leavetypes = await _leaveTypeRepository.Add(leavetypes);
         return leavetypes.Id;

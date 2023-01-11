@@ -2,8 +2,15 @@
 
 namespace LeaveManagementApplication.Application.ViewModels;
 
-public class LeaveTypeViewModel : BaseViewModel
+public interface ILeaveTypeViewModel 
 {
-    public string Name { get; private set; }
-    public int defaultDay { get; private set; }
+
+    public string Name { get;  set; }
+    public int defaultDay { get; set; }
+}
+
+public class LeaveTypeViewModel : BaseViewModel , ILeaveTypeViewModel
+{
+    public string Name { get; set; }
+    public int defaultDay { get; set; }
 }
