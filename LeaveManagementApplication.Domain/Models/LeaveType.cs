@@ -4,7 +4,7 @@ namespace LeaveManagementApplication.Domain.Models;
 
 public class LeaveType : AuditEntity<int>
 {
-    public int Id { get; private set; }
-    public string Name { get; private set; }
-    public int defaultDay { get; private set; }
+    public int Id { get;set; }
+    public string Name { get;set; }
+    public int defaultDay { get;set; }
 }

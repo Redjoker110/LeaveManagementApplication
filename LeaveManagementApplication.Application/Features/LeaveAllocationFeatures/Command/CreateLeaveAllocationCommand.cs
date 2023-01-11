@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LeaveManagementApplication.Application.Features.LeaveAllocationFeatures.Validators;
 using LeaveManagementApplication.Application.Persistance.Contracts;
 using LeaveManagementApplication.Application.ViewModels;
 using LeaveManagementApplication.Application.ViewModels.LeaveAllocation;
@@ -9,11 +10,11 @@ namespace LeaveManagementApplication.Application.Features.LeaveAllocationFeature
 
 public class CreateLeaveAllocationCommand : IRequest<int>
 {
-    public int numberOfDays { get; private set; }
-    public LeaveTypeViewModel leaveType { get; private set; }
-    public int leaveTypeId { get; private set; }
-    public int period { get; private set; }
-    public LeaveAllocationViewModel leaveAllocationViewModel { get; private set; }
+    public int numberOfDays { get;set; }
+    public LeaveTypeViewModel leaveType { get;set; }
+    public int leaveTypeId { get;set; }
+    public int period { get;set; }
+    public LeaveAllocationViewModel leaveAllocationViewModel { get;set; }
 }
 
 public class CreateLeaveAllocationCommandHandler : IRequestHandler<CreateLeaveAllocationCommand, int>
@@ -29,6 +30,15 @@ public class CreateLeaveAllocationCommandHandler : IRequestHandler<CreateLeaveAl
 
     public async Task<int> Handle(CreateLeaveAllocationCommand command ,CancellationToken cancellationToken)
     {
+        var validator = new CreateLeaveAllocationValidator();
+        var valiatorResult = await validator.ValidateAsync(command.leaveAllocationViewModel);
+
+        if (valiatorResult.IsValid == false)
+        {
+            throw new Exception();
+
+        }
+
         var leaveAllocation = _mapper.Map<LeaveAllocation>(command.leaveAllocationViewModel);
         leaveAllocation = await _leaveAllocationRepository.Add(leaveAllocation);
         return leaveAllocation.Id;

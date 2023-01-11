@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using LeaveManagementApplication.Application.Exceptions;
 using LeaveManagementApplication.Application.Persistance.Contracts;
+using LeaveManagementApplication.Domain.Models;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,10 @@ namespace LeaveManagementApplication.Application.Features.LeaveAllocationFeature
         public async Task<Unit> Handle(DeleteLeaveAllocationCommand command, CancellationToken cancellationToken)
         {
             var leaveAllocation = await _leaveAllocationRepository.Get(command.Id);
+            if (leaveAllocation == null)
+            {
+                throw new NotFoundException(nameof(LeaveAllocation), command.Id);
+            }
             await _leaveAllocationRepository.delete(leaveAllocation);
             return Unit.Value;
         }

@@ -15,7 +15,7 @@ namespace LeaveManagementApplication.Application.Features.LeaveAllocationFeature
             Include(new CreateLeaveAllocationValidator());
 
             RuleFor(p => p.Id)
-                .NotNull().WithMessage("{PropertyName} must ne present");
+                .NotNull().WithMessage("{PropertyName} must be present");
 
 
         }
