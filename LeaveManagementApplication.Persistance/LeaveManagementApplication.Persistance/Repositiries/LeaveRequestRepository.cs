@@ -20,9 +20,9 @@ namespace LeaveManagementApplication.Persistance.Repositiries
 
     public class LeaveRequestRepository : GenericRepository<LeaveRequest>, ILeaveRequestRepository
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly LeaveManagementDbContext _dbContext;
 
-        public LeaveRequestRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public LeaveRequestRepository(LeaveManagementDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
@@ -31,8 +31,8 @@ namespace LeaveManagementApplication.Persistance.Repositiries
         {
             var leaveRequest = _dbContext.LeaveRequest
                 .Include(x => x.leaveType)
-                .FirstOrDefaultAsync(x => x.Id == Id);
-            return leaveRequest;
+                .FirstOrDefaultAsync(x => x.Id==Id);
+            return leaveRequest.Result;
 
         }
 

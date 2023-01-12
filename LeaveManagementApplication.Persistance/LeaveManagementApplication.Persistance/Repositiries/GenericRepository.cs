@@ -23,10 +23,10 @@ namespace LeaveManagementApplication.Persistance.Repositiries
 
     public class GenericRepository<T>: IGenericRepository<T> where T : class
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly LeaveManagementDbContext _dbContext;
 
 
-        public GenericRepository(ApplicationDbContext dbContext)
+        public GenericRepository(LeaveManagementDbContext dbContext)
         {
             _dbContext = dbContext;
         }
