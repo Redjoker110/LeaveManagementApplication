@@ -8,12 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LeaveManagementApplication.Application\LeaveManagementApplication.Application.csproj" />
     <ProjectReference Include="..\LeaveManagementApplication.Domain\LeaveManagementApplication.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Context\" />
   </ItemGroup>
 
 </Project>

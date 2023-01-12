@@ -24,7 +24,7 @@ namespace LeaveManagementApplication.Application.Features.LeaveRequestFeatures.C
         public bool approved { get;set; }
         public bool cancelled { get;set; }
         public LeaveRequestViewModel leaveRequestViewModel { get;  set; }
-        public ChangeLeaveRequestApprovalViewModel changeLeaveRequestApprovalViewModel { get;  set}
+        public ChangeLeaveRequestApprovalViewModel changeLeaveRequestApprovalViewModel { get; set; }
 
     }
 
