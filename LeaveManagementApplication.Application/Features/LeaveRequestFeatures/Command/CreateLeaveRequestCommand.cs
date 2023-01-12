@@ -56,8 +56,7 @@ public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveReque
         leaveRequests = await _leaveRequestRepository.Add(leaveRequests);
         
         response.Success = true;
-        response.Message = "Creation Successfull";
-        response.id = leaveRequests.Id;
+        response.Message = "Creation Successful";
         response.id = leaveRequests.Id;
         return response;
 
