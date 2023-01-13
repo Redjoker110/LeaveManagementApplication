@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using FluentValidation;
-using LeaveManagementApplication.Application.Exceptions;
+﻿using AutoMapper;
 using LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Validators;
-using LeaveManagementApplication.Application.Persistance.Contracts;
-using LeaveManagementApplication.Application.ViewModels;
+using LeaveManagementApplication.Application.IRepositories;
+using LeaveManagementApplication.Application.ViewModels.Leavetype;
 using MediatR;
 using ValidationException = LeaveManagementApplication.Application.Exceptions.ValidationException;
 

@@ -1,6 +1,6 @@
-﻿using LeaveManagementApplication.Application.ViewModels;
-using LeaveManagementApplication.Application.ViewModels.LeaveAllocation;
+﻿using LeaveManagementApplication.Application.ViewModels.LeaveAllocation;
 using LeaveManagementApplication.Application.ViewModels.LeaveRequest;
+using LeaveManagementApplication.Application.ViewModels.Leavetype;
 using LeaveManagementApplication.Domain.Models;
 
 namespace LeaveManagementApplication.Application.Profile;

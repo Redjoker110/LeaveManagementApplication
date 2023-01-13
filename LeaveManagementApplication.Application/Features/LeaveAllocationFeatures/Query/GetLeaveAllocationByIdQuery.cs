@@ -1,6 +1,5 @@
 ﻿using LeaveManagementApplication.Application.ViewModels.LeaveAllocation;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace LeaveManagementApplication.Application.Features.LeaveAllocationFeatures.Query;
 

@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-using LeaveManagementApplication.Application.Features.LeaveAllocationFeatures.Command;
 using LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Validators;
-using LeaveManagementApplication.Application.Persistance.Contracts;
+using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Application.Responses;
-using LeaveManagementApplication.Application.ViewModels;
+using LeaveManagementApplication.Application.ViewModels.Leavetype;
 using LeaveManagementApplication.Domain.Models;
 using MediatR;
 

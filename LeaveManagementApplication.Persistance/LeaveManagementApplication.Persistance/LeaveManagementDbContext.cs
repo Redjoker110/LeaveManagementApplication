@@ -3,7 +3,7 @@ using LeaveManagementApplication.Domain.Common;
 using LeaveManagementApplication.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace LeaveManagementApplication.Infrastructure.Context;
+namespace LeaveManagementApplication.Persistance;
 
 public class LeaveManagementDbContext : DbContext, IApplicationDbContext
 {

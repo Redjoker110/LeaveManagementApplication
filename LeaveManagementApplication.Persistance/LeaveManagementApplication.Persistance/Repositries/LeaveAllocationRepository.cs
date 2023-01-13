@@ -1,26 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Domain.Models;
-using LeaveManagementApplication.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace LeaveManagementApplication.Persistance.Repositiries
+namespace LeaveManagementApplication.Persistance.Repositries
 {
-    public interface ILeaveAllocationRepository : IGenericRepository<LeaveAllocation>
-    {
-        Task<LeaveAllocation> GetLeaveAllocationWithDetails(int Id);
-        Task<List<LeaveAllocation>> GetLeaveAllocationsList();
-
-
-
-
-
-
-    }
 
     public class LeaveAllocationRepository : GenericRepository<LeaveAllocation>, ILeaveAllocationRepository
     {

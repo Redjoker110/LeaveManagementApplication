@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using LeaveManagementApplication.Application.Persistance.Contracts;
+﻿using AutoMapper;
+using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Application.ViewModels.LeaveAllocation;
 using MediatR;
 
-namespace LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Query
+namespace LeaveManagementApplication.Application.Features.LeaveAllocationFeatures.Query
 {
     public class GetLeaveAllocationDetailQuery :IRequest<LeaveAllocationViewModel>
     {

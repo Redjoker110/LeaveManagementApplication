@@ -1,24 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Domain.Models;
-using LeaveManagementApplication.Infrastructure.Context;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
-namespace LeaveManagementApplication.Persistance.Repositiries
+namespace LeaveManagementApplication.Persistance.Repositries
 {
-    public interface ILeaveTypeRepository : IGenericRepository<LeaveType>
-    {
-        Task<LeaveType> GetLeaveTypeWithDetails(int Id);
-        Task<List<LeaveType>> GetLeaveTypesList();
-        Task<LeaveType> AddLeaveType(LeaveType leaveType);
-
-
-    }
+  
 
     public class LeaveTypeRepository : GenericRepository<LeaveType>, ILeaveTypeRepository
     {

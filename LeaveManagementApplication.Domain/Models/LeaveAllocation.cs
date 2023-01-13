@@ -15,9 +15,6 @@ namespace LeaveManagementApplication.Domain.Models
         public int leaveTypeId { get;set; }
         public int period { get;set; }
 
-        public LeaveManagementApplication.Application.ViewModels.LeaveAllocationViewModel Equals()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

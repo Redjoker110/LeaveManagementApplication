@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using FluentValidation.Internal;
 using LeaveManagementApplication.Application.Exceptions;
 using LeaveManagementApplication.Application.Features.LeaveAllocationFeatures.Validators;
-using LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Command;
-using LeaveManagementApplication.Application.Persistance.Contracts;
+using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Application.ViewModels.LeaveAllocation;
 using MediatR;
-using Microsoft.EntityFrameworkCore.Update.Internal;
 
 namespace LeaveManagementApplication.Application.Features.LeaveAllocationFeatures.Command;
 

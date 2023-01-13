@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using LeaveManagementApplication.Application.Exceptions;
-using LeaveManagementApplication.Application.Persistance.Contracts;
+using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Domain.Models;
 using MediatR;
 

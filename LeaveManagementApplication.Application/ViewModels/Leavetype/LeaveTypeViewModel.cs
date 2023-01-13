@@ -1,6 +1,6 @@
 ﻿using LeaveManagementApplication.Application.ViewModels.Common;
 
-namespace LeaveManagementApplication.Application.ViewModels;
+namespace LeaveManagementApplication.Application.ViewModels.Leavetype;
 
 public interface ILeaveTypeViewModel 
 {

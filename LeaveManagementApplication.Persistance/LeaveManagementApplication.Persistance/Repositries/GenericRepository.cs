@@ -1,25 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LeaveManagementApplication.Infrastructure.Context;
+﻿using LeaveManagementApplication.Application.IRepositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace LeaveManagementApplication.Persistance.Repositiries
+namespace LeaveManagementApplication.Persistance.Repositries
 {
-    public interface IGenericRepository<T> where T : class
-
-    {
-
-        Task<T> Get(int id);
-        Task<IReadOnlyList<T>> GetAll();
-        Task<T> Add(T id);
-        Task update(T entity);
-        Task delete(T entity);
-        Task<bool> Exists(int id);
-
-    }
+    
 
     public class GenericRepository<T>: IGenericRepository<T> where T : class
     {

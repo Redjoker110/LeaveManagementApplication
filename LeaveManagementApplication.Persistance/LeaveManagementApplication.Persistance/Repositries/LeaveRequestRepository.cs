@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Domain.Models;
-using LeaveManagementApplication.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace LeaveManagementApplication.Persistance.Repositiries
+namespace LeaveManagementApplication.Persistance.Repositries
 {
-    public interface ILeaveRequestRepository : IGenericRepository<LeaveRequest>
-    {
-        Task<LeaveRequest> GetLeaveRequestWithDetails(int Id);
-        Task<List<LeaveRequest>> GetLeaveRequestsList();
-        Task ChangeApprovalStatus(LeaveRequest leaveRequest, bool ApprovalStatus);
-
-
-    }
 
     public class LeaveRequestRepository : GenericRepository<LeaveRequest>, ILeaveRequestRepository
     {

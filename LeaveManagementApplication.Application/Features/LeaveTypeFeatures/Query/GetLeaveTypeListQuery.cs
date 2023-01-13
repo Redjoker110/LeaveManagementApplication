@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using LeaveManagementApplication.Application.Persistance.Contracts;
-using LeaveManagementApplication.Application.ViewModels;
+using LeaveManagementApplication.Application.IRepositories;
+using LeaveManagementApplication.Application.ViewModels.Leavetype;
 using MediatR;
 
 namespace LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Query;

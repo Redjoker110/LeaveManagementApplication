@@ -1,13 +1,7 @@
-﻿using LeaveManagementApplication.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using LeaveManagementApplication.Application.Exceptions;
 using LeaveManagementApplication.Application.Features.LeaveRequestFeatures.Validators;
-using LeaveManagementApplication.Application.Persistance.Contracts;
+using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Application.ViewModels.LeaveRequest;
 using MediatR;
 
@@ -63,7 +57,7 @@ namespace LeaveManagementApplication.Application.Features.LeaveRequestFeatures.C
             }
             else if(command.changeLeaveRequestApprovalViewModel != null)
             {
-                await _leaveRequestRepository.ChangeApprovalStatus(leaveRequest.Result , command.changeLeaveRequestApprovalViewModel.Approved);
+                await _leaveRequestRepository.ChangeApprovalStatus(leaveRequest.Result ,command.changeLeaveRequestApprovalViewModel.Approved.HasValue);
             }
 
             return Unit.Value;

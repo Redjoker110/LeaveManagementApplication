@@ -1,5 +1,5 @@
 ﻿using LeaveManagementApplication.Application.ViewModels.Common;
-using LeaveManagementApplication.Domain.Models;
+using LeaveManagementApplication.Application.ViewModels.Leavetype;
 
 namespace LeaveManagementApplication.Application.ViewModels.LeaveAllocation;
 
