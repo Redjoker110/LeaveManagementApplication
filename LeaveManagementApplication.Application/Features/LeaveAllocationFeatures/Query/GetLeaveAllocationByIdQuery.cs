@@ -25,7 +25,8 @@ public class GetLeaveAllocationByIdQueryHandler : IRequestHandler<GetLeaveAlloca
     //    if (leaveAllocationInformation == null) return  null;
     //    throw NotImplementedException;
     //}
-    public Task<LeaveAllocationViewModel> Handle(GetLeaveAllocationByIdQuery request, CancellationToken cancellationToken)
+    public Task<LeaveAllocationViewModel> Handle(GetLeaveAllocationByIdQuery request,
+        CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

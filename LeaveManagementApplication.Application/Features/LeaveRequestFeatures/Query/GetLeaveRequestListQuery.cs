@@ -11,8 +11,8 @@ public class GetLeaveAllocationListQuery : IRequest<List<LeaveRequestViewModel>>
 
 public class GetLeaveRequestListQueryHandler : IRequestHandler<GetLeaveAllocationListQuery, List<LeaveRequestViewModel>>
 {
-    private readonly IMapper _mapper;
     private readonly ILeaveRequestRepository _leaveRequestRepository;
+    private readonly IMapper _mapper;
 
     public GetLeaveRequestListQueryHandler(IMapper mapper, ILeaveRequestRepository leaveRequestRepository)
     {
@@ -21,7 +21,8 @@ public class GetLeaveRequestListQueryHandler : IRequestHandler<GetLeaveAllocatio
     }
 
 
-    public async Task<List<LeaveRequestViewModel>> Handle(GetLeaveAllocationListQuery request, CancellationToken cancellationToken)
+    public async Task<List<LeaveRequestViewModel>> Handle(GetLeaveAllocationListQuery request,
+        CancellationToken cancellationToken)
     {
         try
         {

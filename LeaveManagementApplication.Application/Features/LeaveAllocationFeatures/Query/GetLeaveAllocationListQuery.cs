@@ -9,10 +9,11 @@ public class GetLeaveAllocationListQuery : IRequest<List<LeaveAllocationViewMode
 {
 }
 
-public class GetLeaveAllocationListQueryHandler : IRequestHandler<GetLeaveAllocationListQuery, List<LeaveAllocationViewModel>>
+public class
+    GetLeaveAllocationListQueryHandler : IRequestHandler<GetLeaveAllocationListQuery, List<LeaveAllocationViewModel>>
 {
-    private readonly IMapper _mapper;
     private readonly ILeaveAllocationRepository _leaveAllocationRepository;
+    private readonly IMapper _mapper;
 
     public GetLeaveAllocationListQueryHandler(IMapper mapper, ILeaveAllocationRepository leaveAllocationRepository)
     {
@@ -21,7 +22,8 @@ public class GetLeaveAllocationListQueryHandler : IRequestHandler<GetLeaveAlloca
     }
 
 
-    public async Task<List<LeaveAllocationViewModel>> Handle(GetLeaveAllocationListQuery request, CancellationToken cancellationToken)
+    public async Task<List<LeaveAllocationViewModel>> Handle(GetLeaveAllocationListQuery request,
+        CancellationToken cancellationToken)
     {
         try
         {

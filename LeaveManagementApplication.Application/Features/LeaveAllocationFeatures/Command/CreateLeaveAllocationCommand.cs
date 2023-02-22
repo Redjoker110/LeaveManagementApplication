@@ -10,17 +10,17 @@ namespace LeaveManagementApplication.Application.Features.LeaveAllocationFeature
 
 public class CreateLeaveAllocationCommand : IRequest<int>
 {
-    public int numberOfDays { get;set; }
-    public LeaveTypeViewModel leaveType { get;set; }
-    public int leaveTypeId { get;set; }
-    public int period { get;set; }
-    public LeaveAllocationViewModel leaveAllocationViewModel { get;set; }
+    public int numberOfDays { get; set; }
+    public LeaveTypeViewModel leaveType { get; set; }
+    public int leaveTypeId { get; set; }
+    public int period { get; set; }
+    public LeaveAllocationViewModel leaveAllocationViewModel { get; set; }
 }
 
 public class CreateLeaveAllocationCommandHandler : IRequestHandler<CreateLeaveAllocationCommand, int>
 {
-    private readonly IMapper _mapper;
     private readonly ILeaveAllocationRepository _leaveAllocationRepository;
+    private readonly IMapper _mapper;
 
     public CreateLeaveAllocationCommandHandler(IMapper mapper, ILeaveAllocationRepository leaveAllocationRepository)
     {
@@ -28,22 +28,15 @@ public class CreateLeaveAllocationCommandHandler : IRequestHandler<CreateLeaveAl
         _leaveAllocationRepository = leaveAllocationRepository;
     }
 
-    public async Task<int> Handle(CreateLeaveAllocationCommand command ,CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateLeaveAllocationCommand command, CancellationToken cancellationToken)
     {
         var validator = new CreateLeaveAllocationValidator();
         var valiatorResult = await validator.ValidateAsync(command.leaveAllocationViewModel);
 
-        if (valiatorResult.IsValid == false)
-        {
-            throw new Exception();
-
-        }
+        if (valiatorResult.IsValid == false) throw new Exception();
 
         var leaveAllocation = _mapper.Map<LeaveAllocation>(command.leaveAllocationViewModel);
         leaveAllocation = await _leaveAllocationRepository.Add(leaveAllocation);
         return leaveAllocation.Id;
     }
-
-
-   
 }

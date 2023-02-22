@@ -12,8 +12,8 @@ public class GetLeaveRequestDetailQuery : IRequest<LeaveRequestViewModel>
 
 public class GetLeaveRequestDetailQueryHandler : IRequestHandler<GetLeaveRequestDetailQuery, LeaveRequestViewModel>
 {
-    private readonly IMapper _mapper;
     private readonly ILeaveRequestRepository _leaveRequestRepository;
+    private readonly IMapper _mapper;
 
     public GetLeaveRequestDetailQueryHandler(IMapper mapper, ILeaveRequestRepository leaveRequestRepository)
     {

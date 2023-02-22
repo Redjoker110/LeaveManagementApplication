@@ -5,67 +5,56 @@ using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Application.ViewModels.LeaveRequest;
 using MediatR;
 
-namespace LeaveManagementApplication.Application.Features.LeaveRequestFeatures.Command
+namespace LeaveManagementApplication.Application.Features.LeaveRequestFeatures.Command;
+
+public class UpdateLeaveRequestCommand : IRequest<Unit>
 {
-    public class UpdateLeaveRequestCommand : IRequest<Unit>
-    {
-        public int Id { get; set; }
-        public DateTime startDate { get;set; }
-        public DateTime endDate { get;set; }
-        public int leaveTypeId { get;set; }
-        public string requestComments { get;set; }
-        
-        public bool approved { get;set; }
-        public bool cancelled { get;set; }
-        public LeaveRequestViewModel leaveRequestViewModel { get;  set; }
-        public ChangeLeaveRequestApprovalViewModel changeLeaveRequestApprovalViewModel { get; set; }
+    public int Id { get; set; }
+    public DateTime startDate { get; set; }
+    public DateTime endDate { get; set; }
+    public int leaveTypeId { get; set; }
+    public string requestComments { get; set; }
 
+    public bool approved { get; set; }
+    public bool cancelled { get; set; }
+    public LeaveRequestViewModel leaveRequestViewModel { get; set; }
+    public ChangeLeaveRequestApprovalViewModel changeLeaveRequestApprovalViewModel { get; set; }
+}
+
+public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveRequestCommand, Unit>
+{
+    private readonly ILeaveRequestRepository _leaveRequestRepository;
+    private readonly ILeaveTypeRepository _leaveTypeRepository;
+    private readonly IMapper _mapper;
+
+    public UpdateLeaveRequestCommandHandler(IMapper mapper, ILeaveRequestRepository leaveRequestRepository,
+        ILeaveTypeRepository leaveTypeRepository)
+    {
+        _mapper = mapper;
+        _leaveRequestRepository = leaveRequestRepository;
+        _leaveTypeRepository = leaveTypeRepository;
     }
 
-    public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveRequestCommand, Unit>
+    public async Task<Unit> Handle(UpdateLeaveRequestCommand command, CancellationToken cancellationToken)
     {
-        private readonly  IMapper _mapper;
-        private readonly ILeaveRequestRepository _leaveRequestRepository;
-        private readonly ILeaveTypeRepository _leaveTypeRepository;
+        var validator = new UpdateLeaveRequestValidator(_leaveTypeRepository);
+        var validatorResult = await validator.ValidateAsync(command.leaveRequestViewModel);
 
-        public UpdateLeaveRequestCommandHandler(IMapper mapper , ILeaveRequestRepository leaveRequestRepository, ILeaveTypeRepository leaveTypeRepository)
-        { 
-            _mapper = mapper;
-            _leaveRequestRepository = leaveRequestRepository;
-            _leaveTypeRepository = leaveTypeRepository;
-            
-        }
+        if (validatorResult.IsValid == false) throw new ValidationException(validatorResult);
 
-        public async Task<Unit> Handle(UpdateLeaveRequestCommand command, CancellationToken cancellationToken)
+        var leaveRequest = _leaveRequestRepository.Get(command.leaveRequestViewModel.Id);
+
+        if (command.leaveRequestViewModel != null)
         {
-            var validator = new UpdateLeaveRequestValidator(_leaveTypeRepository);
-            var validatorResult = await validator.ValidateAsync(command.leaveRequestViewModel);
-
-            if (validatorResult.IsValid == false)
-            {
-                throw new ValidationException(validatorResult);
-            }
-
-            var leaveRequest = _leaveRequestRepository.Get(command.leaveRequestViewModel.Id);
-
-            if (command.leaveRequestViewModel != null)
-            {
-                
-                await _mapper.Map(command.leaveRequestViewModel, leaveRequest);
-                await _leaveRequestRepository.update(leaveRequest.Result);
-
-            }
-            else if(command.changeLeaveRequestApprovalViewModel != null)
-            {
-                await _leaveRequestRepository.ChangeApprovalStatus(leaveRequest.Result ,command.changeLeaveRequestApprovalViewModel.Approved.HasValue);
-            }
-
-            return Unit.Value;
-
-
+            await _mapper.Map(command.leaveRequestViewModel, leaveRequest);
+            await _leaveRequestRepository.update(leaveRequest.Result);
         }
+        else if (command.changeLeaveRequestApprovalViewModel != null)
+        {
+            await _leaveRequestRepository.ChangeApprovalStatus(leaveRequest.Result,
+                command.changeLeaveRequestApprovalViewModel.Approved.HasValue);
+        }
+
+        return Unit.Value;
     }
-
-
-
 }

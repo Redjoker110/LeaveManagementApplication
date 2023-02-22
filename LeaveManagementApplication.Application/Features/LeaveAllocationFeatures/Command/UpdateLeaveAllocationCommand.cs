@@ -10,17 +10,17 @@ namespace LeaveManagementApplication.Application.Features.LeaveAllocationFeature
 public class UpdateLeaveAllocationCommand : IRequest<Unit>
 {
     public int id { get; set; }
-    public int numberOfDays { get;set; }
-    public int leaveTypeId { get;set; }
-    public int period { get;set; }
-    public LeaveAllocationViewModel leaveAllocationViewModel { get;set; }
+    public int numberOfDays { get; set; }
+    public int leaveTypeId { get; set; }
+    public int period { get; set; }
+    public LeaveAllocationViewModel leaveAllocationViewModel { get; set; }
 }
 
-public class UpdateLeaveAllocationCommandHandler  : IRequestHandler<UpdateLeaveAllocationCommand, Unit>
+public class UpdateLeaveAllocationCommandHandler : IRequestHandler<UpdateLeaveAllocationCommand, Unit>
 {
+    private readonly ILeaveAllocationRepository _leaveAllocationRepository;
 
     private readonly IMapper _mapper;
-    private readonly ILeaveAllocationRepository _leaveAllocationRepository;
 
     public UpdateLeaveAllocationCommandHandler(IMapper mapper, ILeaveAllocationRepository leaveAllocationRepository)
     {
@@ -29,15 +29,12 @@ public class UpdateLeaveAllocationCommandHandler  : IRequestHandler<UpdateLeaveA
     }
 
 
-    public async Task<Unit> Handle( UpdateLeaveAllocationCommand command, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateLeaveAllocationCommand command, CancellationToken cancellationToken)
     {
         var validator = new UpdateLeaveAllocationValidator();
         var validatorResult = await validator.ValidateAsync(command.leaveAllocationViewModel);
 
-        if (validatorResult.IsValid==false)
-        {
-            throw new ValidationException(validatorResult);
-        }
+        if (validatorResult.IsValid == false) throw new ValidationException(validatorResult);
 
         var leaveAllocation = _leaveAllocationRepository.Get(command.leaveAllocationViewModel.Id);
         await _mapper.Map(command.leaveAllocationViewModel, leaveAllocation);

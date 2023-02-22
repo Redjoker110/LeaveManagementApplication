@@ -10,9 +10,8 @@ public class MappingProfile : AutoMapper.Profile
 {
     public MappingProfile()
     {
-        CreateMap<LeaveRequest, LeaveRequestViewModel>().ReverseMap(); 
+        CreateMap<LeaveRequest, LeaveRequestViewModel>().ReverseMap();
         CreateMap<LeaveAllocation, LeaveAllocationViewModel>().ReverseMap();
-        CreateMap<LeaveType, LeaveTypeViewModel >().ReverseMap();
+        CreateMap<LeaveType, LeaveTypeViewModel>().ReverseMap();
     }
-
 }

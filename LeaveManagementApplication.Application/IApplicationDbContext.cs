@@ -13,7 +13,4 @@ public interface IApplicationDbContext
 
     //LeaveRequest
     public DbSet<LeaveRequest> LeaveRequest { get; set; }
-
-  
-
 }

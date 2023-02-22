@@ -4,38 +4,32 @@ using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Domain.Models;
 using MediatR;
 
-namespace LeaveManagementApplication.Application.Features.LeaveRequestFeatures.Command
+namespace LeaveManagementApplication.Application.Features.LeaveRequestFeatures.Command;
+
+public class DeleteLeaveRequestCommand : IRequest
 {
+    public int Id { get; set; }
+}
 
-    public class DeleteLeaveRequestCommand : IRequest
+public class DeleteLeaveRequestCommandHandler : IRequestHandler<DeleteLeaveRequestCommand>
+{
+    private readonly ILeaveRequestRepository _leaveRequestRepository;
+
+    private readonly IMapper _mapper;
+
+    public DeleteLeaveRequestCommandHandler(IMapper mapper, ILeaveRequestRepository leaveRequestRepository)
     {
-        public int Id { get; set; }
-
+        _mapper = mapper;
+        _leaveRequestRepository = leaveRequestRepository;
     }
 
-    public class DeleteLeaveRequestCommandHandler : IRequestHandler<DeleteLeaveRequestCommand>
+    public async Task<Unit> Handle(DeleteLeaveRequestCommand command, CancellationToken cancellationToken)
     {
-
-        private readonly IMapper _mapper;
-        private readonly ILeaveRequestRepository _leaveRequestRepository;
-
-        public DeleteLeaveRequestCommandHandler(IMapper mapper, ILeaveRequestRepository leaveRequestRepository)
-        {
-            _mapper = mapper;
-            _leaveRequestRepository = leaveRequestRepository;
-        }
-
-        public async Task<Unit> Handle(DeleteLeaveRequestCommand command, CancellationToken cancellationToken)
-        {
-            var leaveRequest = await _leaveRequestRepository.Get(command.Id);
+        var leaveRequest = await _leaveRequestRepository.Get(command.Id);
 
 
-            if (leaveRequest == null)
-            {
-                throw new NotFoundException(nameof(LeaveRequest), command.Id);
-            }
-            await _leaveRequestRepository.delete(leaveRequest);
-            return Unit.Value;
-        }
+        if (leaveRequest == null) throw new NotFoundException(nameof(LeaveRequest), command.Id);
+        await _leaveRequestRepository.delete(leaveRequest);
+        return Unit.Value;
     }
 }

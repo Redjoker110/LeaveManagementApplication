@@ -8,7 +8,7 @@ using MediatR;
 
 namespace LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Command;
 
-public class CreateLeaveTypeCommand : IRequest<BAseCommandResponse> 
+public class CreateLeaveTypeCommand : IRequest<BAseCommandResponse>
 {
     public int Id { get; set; }
     public string name { get; set; }
@@ -18,8 +18,8 @@ public class CreateLeaveTypeCommand : IRequest<BAseCommandResponse>
 
 public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeCommand, BAseCommandResponse>
 {
-    private readonly IMapper _mapper;
     private readonly ILeaveTypeRepository _leaveTypeRepository;
+    private readonly IMapper _mapper;
 
     public CreateLeaveTypeCommandHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepository)
     {

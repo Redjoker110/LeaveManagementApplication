@@ -2,24 +2,21 @@
 using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Application.ViewModels.LeaveRequest;
 
-namespace LeaveManagementApplication.Application.Features.LeaveRequestFeatures.Validators
+namespace LeaveManagementApplication.Application.Features.LeaveRequestFeatures.Validators;
+
+public class UpdateLeaveRequestValidator : AbstractValidator<LeaveRequestViewModel>
 {
-    public class UpdateLeaveRequestValidator: AbstractValidator<LeaveRequestViewModel>
+    private readonly ILeaveTypeRepository _leaveTypeRepository;
+
+    public UpdateLeaveRequestValidator(ILeaveTypeRepository leaveTypeRepository)
+
     {
-        private readonly ILeaveTypeRepository _leaveTypeRepository;
+        _leaveTypeRepository = leaveTypeRepository;
 
-        public UpdateLeaveRequestValidator(ILeaveTypeRepository leaveTypeRepository)
 
-        {
+        Include(new CreateLeaveRequestValidator(leaveTypeRepository));
 
-          _leaveTypeRepository = leaveTypeRepository;
-           
-
-            Include(new CreateLeaveRequestValidator(leaveTypeRepository));
-
-            RuleFor(p => p.Id)
-                .NotNull().WithMessage("{PropertyName} must be present");
-
-        }
+        RuleFor(p => p.Id)
+            .NotNull().WithMessage("{PropertyName} must be present");
     }
 }
