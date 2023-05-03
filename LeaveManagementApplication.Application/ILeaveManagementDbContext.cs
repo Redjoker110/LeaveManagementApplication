@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LeaveManagementApplication.Application;
 
-public interface IApplicationDbContext
+public interface ILeaveManagementDbContext
 {
     //LeaveAllocations
     public DbSet<LeaveAllocation> LeaveAllocations { get; set; }

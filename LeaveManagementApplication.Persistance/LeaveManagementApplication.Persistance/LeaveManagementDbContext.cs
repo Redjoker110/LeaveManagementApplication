@@ -1,11 +1,10 @@
-﻿using LeaveManagementApplication.Application;
-using LeaveManagementApplication.Domain.Common;
+﻿using LeaveManagementApplication.Domain.Common;
 using LeaveManagementApplication.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LeaveManagementApplication.Persistance;
 
-public class LeaveManagementDbContext : DbContext, IApplicationDbContext
+public class LeaveManagementDbContext : DbContext
 {
     public LeaveManagementDbContext(DbContextOptions<LeaveManagementDbContext> options) : base(options)
     {

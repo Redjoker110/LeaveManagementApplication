@@ -10,9 +10,9 @@ public class GetLeaveAllocationByIdQuery : IRequest<LeaveAllocationViewModel>
 
 public class GetLeaveAllocationByIdQueryHandler : IRequestHandler<GetLeaveAllocationByIdQuery, LeaveAllocationViewModel>
 {
-    private readonly IApplicationDbContext _context;
+    private readonly ILeaveManagementDbContext _context;
 
-    public GetLeaveAllocationByIdQueryHandler(IApplicationDbContext context)
+    public GetLeaveAllocationByIdQueryHandler(ILeaveManagementDbContext context)
 
     {
         _context = context;

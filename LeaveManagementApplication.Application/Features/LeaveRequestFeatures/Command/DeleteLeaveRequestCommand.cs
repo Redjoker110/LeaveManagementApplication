@@ -23,13 +23,12 @@ public class DeleteLeaveRequestCommandHandler : IRequestHandler<DeleteLeaveReque
         _leaveRequestRepository = leaveRequestRepository;
     }
 
-    public async Task<Unit> Handle(DeleteLeaveRequestCommand command, CancellationToken cancellationToken)
+    public async Task Handle(DeleteLeaveRequestCommand command, CancellationToken cancellationToken)
     {
         var leaveRequest = await _leaveRequestRepository.Get(command.Id);
 
 
         if (leaveRequest == null) throw new NotFoundException(nameof(LeaveRequest), command.Id);
         await _leaveRequestRepository.delete(leaveRequest);
-        return Unit.Value;
     }
 }

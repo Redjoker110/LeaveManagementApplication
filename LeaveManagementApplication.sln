@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagementApplication.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F991AB3F-893B-4E36-93F8-4A9036D94344}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaveManagementApplication.Persistance", "LeaveManagementApplication.Persistance\LeaveManagementApplication.Persistance\LeaveManagementApplication.Persistance.csproj", "{F90B03C2-7A72-48A1-B880-0BA0BBCCB65D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagementApplication.Persistance", "LeaveManagementApplication.Persistance\LeaveManagementApplication.Persistance\LeaveManagementApplication.Persistance.csproj", "{F90B03C2-7A72-48A1-B880-0BA0BBCCB65D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
