@@ -2,9 +2,9 @@
 using LeaveManagementApplication.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace LeaveManagementApplication.Persistance;
+namespace LeaveManagementApplication.Persistance.DbContext;
 
-public class LeaveManagementDbContext : DbContext
+public class LeaveManagementDbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     public LeaveManagementDbContext(DbContextOptions<LeaveManagementDbContext> options) : base(options)
     {
@@ -34,5 +34,14 @@ public class LeaveManagementDbContext : DbContext
         }
 
         return base.SaveChangesAsync(cancellationToken);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseNpgsql(
+                "Host=localhost;Port=5432;Database=leavemanagementdb;Username=postgres;Password=postgres;");
+        }
     }
 }
