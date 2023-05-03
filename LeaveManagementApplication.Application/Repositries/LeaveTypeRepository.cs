@@ -1,5 +1,6 @@
 ﻿using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Domain.Models;
+using LeaveManagementApplication.Persistance.DbContext;
 using Microsoft.EntityFrameworkCore;
 
 namespace LeaveManagementApplication.Persistance.Repositries;
