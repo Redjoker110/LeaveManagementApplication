@@ -1,9 +1,9 @@
 ﻿using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Domain.Models;
-using LeaveManagementApplication.Persistance.DbContext;
+using LeaveManagementApplication.Persistence.DbContext;
 using Microsoft.EntityFrameworkCore;
 
-namespace LeaveManagementApplication.Persistance.Repositries;
+namespace LeaveManagementApplication.Persistence.Repositries;
 
 public class LeaveRequestRepository : GenericRepository<LeaveRequest>, ILeaveRequestRepository
 {

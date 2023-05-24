@@ -1,11 +1,14 @@
 ﻿using FluentValidation;
+using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Application.ViewModels.Leavetype;
 
 namespace LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Validators;
 
 public class CreateLeaveTypeValidator : AbstractValidator<ILeaveTypeViewModel>
 {
-    public CreateLeaveTypeValidator()
+    private readonly ILeaveTypeRepository _leaveTypeRepository;
+
+    public CreateLeaveTypeValidator(ILeaveTypeRepository leaveTypeRepository)
     {
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("{PropertyName} is required")
@@ -17,5 +20,7 @@ public class CreateLeaveTypeValidator : AbstractValidator<ILeaveTypeViewModel>
             .NotNull()
             .GreaterThan(0).WithMessage("{PropertyName} must be at least 1")
             .LessThan(100).WithMessage("{PropertyName} must be less than {ComparisonValue}");
+
+        _leaveTypeRepository = leaveTypeRepository;
     }
 }

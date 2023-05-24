@@ -1,4 +1,6 @@
-﻿using LeaveManagementApplication.Application.ViewModels.LeaveAllocation;
+﻿using AutoMapper;
+using LeaveManagementApplication.Application.IRepositories;
+using LeaveManagementApplication.Application.ViewModels.LeaveAllocation;
 using MediatR;
 
 namespace LeaveManagementApplication.Application.Features.LeaveAllocationFeatures.Query;
@@ -10,22 +12,17 @@ public class GetLeaveAllocationByIdQuery : IRequest<LeaveAllocationViewModel>
 
 public class GetLeaveAllocationByIdQueryHandler : IRequestHandler<GetLeaveAllocationByIdQuery, LeaveAllocationViewModel>
 {
-    private readonly ILeaveManagementDbContext _context;
+    private readonly ILeaveAllocationRepository _leaveAllocationRepository;
+    private readonly IMapper _mapper;
 
-    public GetLeaveAllocationByIdQueryHandler(ILeaveManagementDbContext context)
-
+    public GetLeaveAllocationByIdQueryHandler(ILeaveAllocationRepository leaveAllocationRepository, IMapper mapper)
     {
-        _context = context;
+        _leaveAllocationRepository = leaveAllocationRepository;
+        _mapper = mapper;
     }
 
 
-    //public async  Task<LeaveAllocationViewModel> Handle(GetLeaveAllocationByIdQuery query, CancellationToken cancellationToken)
-    //{
-    //    var leaveAllocationInformation = await _context.LeaveAllocations.FirstOrDefaultAsync(x => x.Id == query.Id);
-    //    if (leaveAllocationInformation == null) return  null;
-    //    throw NotImplementedException;
-    //}
-    public Task<LeaveAllocationViewModel> Handle(GetLeaveAllocationByIdQuery request,
+    public async Task<LeaveAllocationViewModel> Handle(GetLeaveAllocationByIdQuery query,
         CancellationToken cancellationToken)
     {
         throw new NotImplementedException();

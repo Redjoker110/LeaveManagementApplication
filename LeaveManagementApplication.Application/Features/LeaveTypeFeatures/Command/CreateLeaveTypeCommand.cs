@@ -1,25 +1,32 @@
 ﻿using AutoMapper;
 using LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Validators;
 using LeaveManagementApplication.Application.IRepositories;
-using LeaveManagementApplication.Application.Responses;
-using LeaveManagementApplication.Application.ViewModels.Leavetype;
 using LeaveManagementApplication.Domain.Models;
 using MediatR;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Command;
 
-public class CreateLeaveTypeCommand : IRequest<BAseCommandResponse>
+public class CreateLeaveTypeCommand : IRequest<int>
 {
     public int Id { get; set; }
-    public string name { get; set; }
-    public int deafultDays { get; set; }
-    public LeaveTypeViewModel leaveTypeViewModel { get; set; }
+    public string Name { get; set; }
+    public int defaultDay { get; set; }
+    public DateTime CreatedDate { get; set; }
+
+    public string CreateUserId { get; set; } = "admin";
+    public DateTime ModifyDate { get; set; }
+
+    public string ModifyUserId { get; set; } = "admin";
+    public bool IsActive { get; set; } = true;
+    public int StatusId { get; set; }
 }
 
-public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeCommand, BAseCommandResponse>
+public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeCommand, int>
 {
     private readonly ILeaveTypeRepository _leaveTypeRepository;
     private readonly IMapper _mapper;
+
 
     public CreateLeaveTypeCommandHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepository)
     {
@@ -27,26 +34,16 @@ public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeComm
         _leaveTypeRepository = leaveTypeRepository;
     }
 
-    public async Task<BAseCommandResponse> Handle(CreateLeaveTypeCommand command, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateLeaveTypeCommand command, CancellationToken cancellationToken)
     {
-        var response = new BAseCommandResponse();
-        var validator = new CreateLeaveTypeValidator();
-        var validationResult = await validator.ValidateAsync(command.leaveTypeViewModel);
+        var validator = new CreateLeaveTypeValidator(_leaveTypeRepository);
+        // convert to domain entity object
+        var leaveTypesToCreate = _mapper.Map<Domain.Models.LeaveType>(command);
 
-        if (validationResult.IsValid == false)
+        // add to database
+        await _leaveTypeRepository.CreateAsync(leaveTypesToCreate);
 
-        {
-            response.Success = false;
-            response.Message = "Creation Failed";
-            response.Error = validationResult.Errors.Select(x => x.ErrorMessage).ToList();
-        }
-
-        var leavetypes = _mapper.Map<LeaveType>(command.leaveTypeViewModel);
-        leavetypes = await _leaveTypeRepository.Add(leavetypes);
-
-        response.Success = true;
-        response.Message = "Creation Successful";
-        response.id = leavetypes.Id;
-        return response;
+        if (leaveTypesToCreate == null) return default;
+        return leaveTypesToCreate.Id;
     }
 }

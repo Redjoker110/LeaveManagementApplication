@@ -1,6 +1,6 @@
 ﻿namespace LeaveManagementApplication.Application.Responses;
 
-public class BAseCommandResponse
+public class BaseCommandResponse
 {
     public int id { get; set; }
     public bool Success { get; set; } = true;

@@ -1,12 +1,14 @@
-﻿namespace LeaveManagementApplication.Application.IRepositories;
+﻿using LeaveManagementApplication.Domain.Common;
 
-public interface IGenericRepository<T> where T : class
+namespace LeaveManagementApplication.Application.IRepositories;
+
+public interface IGenericRepository<T> where T : BaseEntity
 
 {
-    Task<T> Get(int id);
-    Task<IReadOnlyList<T>> GetAll();
-    Task<T> Add(T id);
-    Task update(T entity);
-    Task delete(T entity);
+    Task<IReadOnlyList<T>> GetAsync();
+    Task<T> GetByIdAsync(int id);
+    Task CreateAsync(T entity);
+    Task UpdateAsync(T entity);
+    Task DeleteAsync(T entity);
     Task<bool> Exists(int id);
 }

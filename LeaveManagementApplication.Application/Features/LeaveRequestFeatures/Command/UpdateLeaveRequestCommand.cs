@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using LeaveManagementApplication.Application.Exceptions;
-using LeaveManagementApplication.Application.Features.LeaveRequestFeatures.Validators;
 using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Application.ViewModels.LeaveRequest;
 using MediatR;
@@ -37,24 +35,6 @@ public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveReque
 
     public async Task<Unit> Handle(UpdateLeaveRequestCommand command, CancellationToken cancellationToken)
     {
-        var validator = new UpdateLeaveRequestValidator(_leaveTypeRepository);
-        var validatorResult = await validator.ValidateAsync(command.leaveRequestViewModel);
-
-        if (validatorResult.IsValid == false) throw new ValidationException(validatorResult);
-
-        var leaveRequest = _leaveRequestRepository.Get(command.leaveRequestViewModel.Id);
-
-        if (command.leaveRequestViewModel != null)
-        {
-            await _mapper.Map(command.leaveRequestViewModel, leaveRequest);
-            await _leaveRequestRepository.update(leaveRequest.Result);
-        }
-        else if (command.changeLeaveRequestApprovalViewModel != null)
-        {
-            await _leaveRequestRepository.ChangeApprovalStatus(leaveRequest.Result,
-                command.changeLeaveRequestApprovalViewModel.Approved.HasValue);
-        }
-
-        return Unit.Value;
+        throw new NotImplementedException();
     }
 }

@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using LeaveManagementApplication.Application.Exceptions;
 using LeaveManagementApplication.Application.IRepositories;
-using LeaveManagementApplication.Domain.Models;
 using MediatR;
 
 namespace LeaveManagementApplication.Application.Features.LeaveAllocationFeatures.Command;
@@ -25,8 +23,6 @@ public class DeleteLeaveAllocationCommandHandler : IRequestHandler<DeleteLeaveAl
 
     public async Task Handle(DeleteLeaveAllocationCommand command, CancellationToken cancellationToken)
     {
-        var leaveAllocation = await _leaveAllocationRepository.Get(command.Id);
-        if (leaveAllocation == null) throw new NotFoundException(nameof(LeaveAllocation), command.Id);
-        await _leaveAllocationRepository.delete(leaveAllocation);
+        throw new NotImplementedException();
     }
 }

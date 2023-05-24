@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using LeaveManagementApplication.Application.Exceptions;
-using LeaveManagementApplication.Application.Features.LeaveAllocationFeatures.Validators;
 using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Application.ViewModels.LeaveAllocation;
 using MediatR;
@@ -31,14 +29,6 @@ public class UpdateLeaveAllocationCommandHandler : IRequestHandler<UpdateLeaveAl
 
     public async Task<Unit> Handle(UpdateLeaveAllocationCommand command, CancellationToken cancellationToken)
     {
-        var validator = new UpdateLeaveAllocationValidator();
-        var validatorResult = await validator.ValidateAsync(command.leaveAllocationViewModel);
-
-        if (validatorResult.IsValid == false) throw new ValidationException(validatorResult);
-
-        var leaveAllocation = _leaveAllocationRepository.Get(command.leaveAllocationViewModel.Id);
-        await _mapper.Map(command.leaveAllocationViewModel, leaveAllocation);
-        await _leaveAllocationRepository.update(leaveAllocation.Result);
-        return Unit.Value;
+        throw new NotImplementedException();
     }
 }

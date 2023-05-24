@@ -1,15 +1,13 @@
 ﻿using AutoMapper;
-using LeaveManagementApplication.Application.Features.LeaveRequestFeatures.Validators;
 using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Application.Responses;
 using LeaveManagementApplication.Application.ViewModels.LeaveRequest;
 using LeaveManagementApplication.Application.ViewModels.Leavetype;
-using LeaveManagementApplication.Domain.Models;
 using MediatR;
 
 namespace LeaveManagementApplication.Application.Features.LeaveRequestFeatures.Command;
 
-public class CreateLeaveRequestCommand : IRequest<BAseCommandResponse>
+public class CreateLeaveRequestCommand : IRequest<BaseCommandResponse>
 {
     public DateTime startDate { get; set; }
     public DateTime endDate { get; set; }
@@ -23,7 +21,7 @@ public class CreateLeaveRequestCommand : IRequest<BAseCommandResponse>
     public LeaveRequestViewModel leaveRequestViewModel { get; set; }
 }
 
-public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveRequestCommand, BAseCommandResponse>
+public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveRequestCommand, BaseCommandResponse>
 {
     private readonly ILeaveRequestRepository _leaveRequestRepository;
     private readonly ILeaveTypeRepository _leaveTypeRepository;
@@ -38,26 +36,9 @@ public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveReque
     }
 
 
-    public async Task<BAseCommandResponse> Handle(CreateLeaveRequestCommand command,
+    public async Task<BaseCommandResponse> Handle(CreateLeaveRequestCommand command,
         CancellationToken cancellationToken)
     {
-        var response = new BAseCommandResponse();
-        var validator = new CreateLeaveRequestValidator(_leaveTypeRepository);
-        var validatorResult = await validator.ValidateAsync(command.leaveRequestViewModel);
-
-        if (validatorResult.IsValid == false)
-        {
-            response.Success = false;
-            response.Message = "Creation Failed";
-            response.Error = validatorResult.Errors.Select(x => x.ErrorMessage).ToList();
-        }
-
-        var leaveRequests = _mapper.Map<LeaveRequest>(command.leaveRequestViewModel);
-        leaveRequests = await _leaveRequestRepository.Add(leaveRequests);
-
-        response.Success = true;
-        response.Message = "Creation Successful";
-        response.id = leaveRequests.Id;
-        return response;
+        throw new NotImplementedException();
     }
 }

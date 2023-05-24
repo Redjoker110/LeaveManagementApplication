@@ -5,6 +5,7 @@ public interface IAuditEntity
     public DateTime CreatedDate { get; set; }
 
     public string CreateUserId { get; set; }
+
     public DateTime ModifyDate { get; set; }
 
     public string ModifyUserId { get; set; }
@@ -16,10 +17,11 @@ public abstract class AuditEntity<T> : Entity<T>, IAuditEntity
 {
     public DateTime CreatedDate { get; set; }
 
-    public string CreateUserId { get; set; }
+
+    public string CreateUserId { get; set; } = "admin";
     public DateTime ModifyDate { get; set; }
 
-    public string ModifyUserId { get; set; }
+    public string ModifyUserId { get; set; } = "admin";
     public bool IsActive { get; set; } = true;
     public int StatusId { get; set; }
 }
