@@ -1,19 +1,28 @@
 ﻿using AutoMapper;
 using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Application.ViewModels.Leavetype;
+using LeaveManagementApplication.Domain.Models;
 using MediatR;
 
 namespace LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Command;
 
-public class UpdateLeaveTypeCommand : IRequest<Unit>
+public class UpdateLeaveTypeCommand : IRequest<int>
 {
-    public int Id { get; set; }
+   public int Id { get; set; }
     public string Name { get; set; }
     public int defaultDay { get; set; }
-    public LeaveTypeViewModel leaveTypeViewModel { get; set; }
+    public DateTime CreatedDate { get; set; }
+
+    public string CreateUserId { get; set; } = "admin";
+    public DateTime ModifyDate { get; set; }
+
+    public string ModifyUserId { get; set; } = "admin";
+    public bool IsActive { get; set; } = true;
+    public int StatusId { get; set; }
+
 }
 
-public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeCommand, Unit>
+public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeCommand, int>
 {
     private readonly ILeaveTypeRepository _leaveTypeRepository;
     private readonly IMapper _mapper;
@@ -25,8 +34,12 @@ public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeComm
     }
 
 
-    public async Task<Unit> Handle(UpdateLeaveTypeCommand command, CancellationToken cancellationToken)
+    public async Task<int> Handle(UpdateLeaveTypeCommand command, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var leaveTypesToUpdate = _mapper.Map<LeaveType>(command);
+        await _leaveTypeRepository.UpdateAsync(leaveTypesToUpdate);
+        if (leaveTypesToUpdate == null) return default;
+        return leaveTypesToUpdate.Id;
+
     }
 }
