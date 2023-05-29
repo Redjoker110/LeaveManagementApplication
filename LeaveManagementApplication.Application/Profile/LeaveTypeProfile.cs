@@ -17,6 +17,7 @@ namespace LeaveManagementApplication.Application.Profile
             CreateMap<LeaveType, LeaveTypeViewModel>();
             CreateMap<CreateLeaveTypeCommand, LeaveType>();
             CreateMap<UpdateLeaveTypeCommand, LeaveType>();
+            CreateMap<DeleteLeaveTypeCommand, LeaveType>();
         }
     }
 }

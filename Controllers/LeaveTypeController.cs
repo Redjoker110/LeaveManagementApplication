@@ -48,14 +48,25 @@ public class LeaveTypeController : ControllerBase
     }
 
     // PUT api/<LeaveTypeController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    [HttpPut("UpdateLeaveType")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult> UpdateLeaveType(UpdateLeaveTypeCommand leaveType)
     {
+
+        await _mediator.Send(leaveType);
+        return NoContent();
+
     }
+    
 
     // DELETE api/<LeaveTypeController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
+    [HttpDelete("DeleteLeaveType")]
+    public async Task<ActionResult> DeleteLeaveType(DeleteLeaveTypeCommand leaveType)
     {
+        await _mediator.Send(leaveType);
+        return NoContent();
     }
 }

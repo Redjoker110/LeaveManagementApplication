@@ -36,9 +36,8 @@ public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeComm
 
     public async Task<int> Handle(CreateLeaveTypeCommand command, CancellationToken cancellationToken)
     {
-        var validator = new CreateLeaveTypeValidator(_leaveTypeRepository);
         // convert to domain entity object
-        var leaveTypesToCreate = _mapper.Map<Domain.Models.LeaveType>(command);
+        var leaveTypesToCreate = _mapper.Map<LeaveType>(command);
 
         // add to database
         await _leaveTypeRepository.CreateAsync(leaveTypesToCreate);

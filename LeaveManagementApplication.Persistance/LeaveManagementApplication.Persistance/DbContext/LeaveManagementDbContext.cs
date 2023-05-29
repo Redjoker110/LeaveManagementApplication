@@ -1,4 +1,5 @@
-﻿using LeaveManagementApplication.Domain.Models;
+﻿using LeaveManagementApplication.Domain.Common;
+using LeaveManagementApplication.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LeaveManagementApplication.Persistence.DbContext;
@@ -18,8 +19,21 @@ public class LeaveManagementDbContext : Microsoft.EntityFrameworkCore.DbContext
     //LeaveRequest
     public DbSet<LeaveRequest> LeaveRequest { get; set; }
 
-    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    public new async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
+        foreach (var entry in base.ChangeTracker.Entries<IAuditEntity>()
+                     .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
+        {
+            entry.Entity.ModifyDate= DateTime.Now;
+         
+         
+            if (entry.State == EntityState.Added)
+            {
+                entry.Entity.CreatedDate = DateTime.Now;
+               
+            }
+        }
+
         return await base.SaveChangesAsync(cancellationToken);
     }
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LeaveManagementApplication.Application.IRepositories;
+using LeaveManagementApplication.Domain.Models;
 using MediatR;
 
 namespace LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Command;
@@ -23,6 +24,8 @@ public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeComm
 
     public async Task Handle(DeleteLeaveTypeCommand command, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var leaveTypeToDelete = _mapper.Map<LeaveType>(command);
+        await _leaveTypeRepository.DeleteAsync(leaveTypeToDelete);
+       
     }
 }
