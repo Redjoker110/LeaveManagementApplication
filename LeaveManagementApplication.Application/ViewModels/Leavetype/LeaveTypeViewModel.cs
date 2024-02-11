@@ -12,9 +12,8 @@ public interface ILeaveTypeViewModel
     public DateTime ModifyDate { get; set; }
 
     public string ModifyUserId { get; set; }
-    public bool IsActive { get; set; } 
+    public bool IsActive { get; set; }
     public int StatusId { get; set; }
-
 }
 
 public class LeaveTypeViewModel : BaseViewModel, ILeaveTypeViewModel

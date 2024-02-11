@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using LeaveManagementApplication.Application.IRepositories;
-using LeaveManagementApplication.Application.ViewModels.Leavetype;
 using LeaveManagementApplication.Domain.Models;
 using MediatR;
 
@@ -8,7 +7,7 @@ namespace LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Comm
 
 public class UpdateLeaveTypeCommand : IRequest<int>
 {
-   public int Id { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
     public int defaultDay { get; set; }
     public DateTime CreatedDate { get; set; }
@@ -19,7 +18,6 @@ public class UpdateLeaveTypeCommand : IRequest<int>
     public string ModifyUserId { get; set; } = "admin";
     public bool IsActive { get; set; } = true;
     public int StatusId { get; set; }
-
 }
 
 public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeCommand, int>
@@ -40,6 +38,5 @@ public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeComm
         await _leaveTypeRepository.UpdateAsync(leaveTypesToUpdate);
         if (leaveTypesToUpdate == null) return default;
         return leaveTypesToUpdate.Id;
-
     }
 }

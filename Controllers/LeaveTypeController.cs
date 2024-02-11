@@ -39,10 +39,10 @@ public class LeaveTypeController : ControllerBase
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> CreateLeaveType( CreateLeaveTypeCommand leaveType)
+    public async Task<ActionResult> CreateLeaveType(CreateLeaveTypeCommand leaveType)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
-        
+
         var response = await _mediator.Send(leaveType);
         return CreatedAtAction(nameof(GetLeaveTypeList), new { id = response });
     }
@@ -55,12 +55,10 @@ public class LeaveTypeController : ControllerBase
     [ProducesDefaultResponseType]
     public async Task<ActionResult> UpdateLeaveType(UpdateLeaveTypeCommand leaveType)
     {
-
         await _mediator.Send(leaveType);
         return NoContent();
-
     }
-    
+
 
     // DELETE api/<LeaveTypeController>/5
     [HttpDelete("DeleteLeaveType")]

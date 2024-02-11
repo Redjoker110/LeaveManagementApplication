@@ -24,14 +24,10 @@ public class LeaveManagementDbContext : Microsoft.EntityFrameworkCore.DbContext
         foreach (var entry in base.ChangeTracker.Entries<IAuditEntity>()
                      .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
         {
-            entry.Entity.ModifyDate= DateTime.Now;
-         
-         
-            if (entry.State == EntityState.Added)
-            {
-                entry.Entity.CreatedDate = DateTime.Now;
-               
-            }
+            entry.Entity.ModifyDate = DateTime.Now;
+
+
+            if (entry.State == EntityState.Added) entry.Entity.CreatedDate = DateTime.Now;
         }
 
         return await base.SaveChangesAsync(cancellationToken);

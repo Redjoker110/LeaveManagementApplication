@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Validators;
 using LeaveManagementApplication.Application.IRepositories;
 using LeaveManagementApplication.Domain.Models;
 using MediatR;
-using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace LeaveManagementApplication.Application.Features.LeaveTypeFeatures.Command;
 

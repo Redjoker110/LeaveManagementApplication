@@ -26,6 +26,5 @@ public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeComm
     {
         var leaveTypeToDelete = _mapper.Map<LeaveType>(command);
         await _leaveTypeRepository.DeleteAsync(leaveTypeToDelete);
-       
     }
 }
